@@ -1,6 +1,6 @@
 import { PointerLockControls, Sky } from '@react-three/drei'
 import { Physics } from '@react-three/rapier'
-import Player from './player/Player.tsx'
+import CharacterController from './player/CharacterController.tsx'
 import Ground from './ground/Ground.tsx'
 
 const Experience = () => {
@@ -11,7 +11,7 @@ const Experience = () => {
       <pointLight castShadow intensity={0.8} position={[100, 100, 100]} />
       <PointerLockControls />
       <Physics debug gravity={[0, -10, 0]}>
-        <Player />
+        <CharacterController />
         <Ground />
       </Physics>
     </>

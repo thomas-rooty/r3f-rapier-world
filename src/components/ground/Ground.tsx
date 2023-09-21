@@ -7,7 +7,7 @@ const Ground = () => {
   const texture = useTexture(grass)
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping
   return (
-    <RigidBody type="fixed" colliders={false} friction={2} name="ground">
+    <RigidBody type="fixed" colliders={false} friction={3} name="ground">
       <mesh receiveShadow position={[0, -1, 0]} rotation-x={-Math.PI / 2}>
         <planeGeometry args={[10, 10]} />
         <meshStandardMaterial map={texture} map-repeat={[240, 240]} color="green" />
