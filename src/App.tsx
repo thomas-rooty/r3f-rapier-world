@@ -1,7 +1,7 @@
 import styles from './App.module.css'
 import { Suspense, useMemo } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { KeyboardControls } from '@react-three/drei'
+import { KeyboardControls, Stats } from '@react-three/drei'
 import Experience from './components/Experience.tsx'
 
 export const Controls = {
@@ -29,6 +29,7 @@ function App() {
     <main className={styles.main}>
       <KeyboardControls map={map}>
         <Canvas shadows camera={{ fov: 60 }}>
+          <Stats />
           <Suspense fallback={null}>
             <Experience />
           </Suspense>

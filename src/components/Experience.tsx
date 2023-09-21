@@ -10,7 +10,7 @@ const Experience = () => {
       <ambientLight intensity={1} />
       <pointLight castShadow intensity={0.8} position={[100, 100, 100]} />
       <PointerLockControls />
-      <Physics debug gravity={[0, -10, 0]}>
+      <Physics debug gravity={[0, -40, 0]}>
         <CharacterController />
         <Ground />
       </Physics>
