@@ -1,3 +1,4 @@
+import * as THREE from 'three'
 import { useRef } from 'react'
 import { Controls } from '../../App.tsx'
 import { useFrame } from '@react-three/fiber'
@@ -7,7 +8,7 @@ import { useCharacterStore } from '../../../stores/character.store.ts'
 
 const JUMP_FORCE = 0.5
 const MOVEMENT_SPEED = 0.1
-const MAX_SPEED = 2
+const MAX_SPEED = 4
 
 const CharacterController = () => {
   const rigidbody = useRef<any>()
@@ -22,15 +23,16 @@ const CharacterController = () => {
   const forwardPressed = useKeyboardControls((state) => state[Controls.forward])
   const backwardPressed = useKeyboardControls((state) => state[Controls.backward])
 
-  // Movement logic
-  useFrame(() => {
+  // Character logic
+  useFrame((state) => {
     const impulse = { x: 0, y: 0, z: 0 }
+    const linvel = rigidbody.current?.linvel()
+    let changeRotation = false
+
+    // Movement
     if (jumpPressed && isOnFloor) {
       impulse.y += JUMP_FORCE
     }
-
-    const linvel = rigidbody.current?.linvel()
-    let changeRotation = false
     if (rightPressed && linvel.x < MAX_SPEED) {
       impulse.x += MOVEMENT_SPEED
       changeRotation = true
@@ -52,6 +54,16 @@ const CharacterController = () => {
     if (changeRotation) {
       character.current.rotation.y = Math.atan2(linvel.x, linvel.z)
     }
+
+    // CAMERA FOLLOW
+    const characterWorldPosition = character.current.getWorldPosition(new THREE.Vector3())
+    state.camera.position.x = characterWorldPosition.x + 3
+    state.camera.position.y = characterWorldPosition.y + 4
+    state.camera.position.z = characterWorldPosition.z + 7
+
+    const targetLookAt = new THREE.Vector3(characterWorldPosition.x, characterWorldPosition.y, characterWorldPosition.z)
+
+    state.camera.lookAt(targetLookAt)
   })
 
   return (
@@ -74,8 +86,8 @@ const CharacterController = () => {
       >
         <CapsuleCollider args={[0.8, 0.4]} position={[0, 1.2, 0]} />
         <group ref={character}>
-          <Sphere>
-            <meshStandardMaterial color="hotpink" transparent opacity={0} />
+          <Sphere castShadow receiveShadow>
+            <meshStandardMaterial color="hotpink" />
           </Sphere>
         </group>
       </RigidBody>
