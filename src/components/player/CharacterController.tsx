@@ -82,7 +82,7 @@ const CharacterController = () => {
             setIsOnFloor(false)
           }
         }}
-        enabledRotations={[false, true, false]}
+        enabledRotations={[false, false, false]}
       >
         <CapsuleCollider args={[0.8, 0.4]} position={[0, 1.2, 0]} />
         <group ref={character}>

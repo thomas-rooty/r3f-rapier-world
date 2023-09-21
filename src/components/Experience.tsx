@@ -1,6 +1,7 @@
 import { Sky } from '@react-three/drei'
 import Ground from './ground/Ground.tsx'
 import CharacterController from './player/CharacterController.tsx'
+import { SampleSphere } from './objects/SampleSphere.tsx'
 
 const Experience = () => {
   return (
@@ -15,6 +16,7 @@ const Experience = () => {
 
       {/* STAGE */}
       <Ground />
+      <SampleSphere />
     </>
   )
 }
