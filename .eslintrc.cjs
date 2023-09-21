@@ -10,5 +10,6 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'react/display-name': 'off',
     'react-hooks/exhaustive-deps': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
   },
 }
