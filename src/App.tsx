@@ -1,6 +1,7 @@
 import styles from './App.module.css'
 import { Suspense, useMemo } from 'react'
 import { Canvas } from '@react-three/fiber'
+import { Physics } from '@react-three/rapier'
 import { KeyboardControls, Stats } from '@react-three/drei'
 import Experience from './components/Experience.tsx'
 
@@ -31,7 +32,9 @@ function App() {
         <Canvas shadows camera={{ fov: 60 }}>
           <Stats />
           <Suspense fallback={null}>
-            <Experience />
+            <Physics debug gravity={[0, -40, 0]}>
+              <Experience />
+            </Physics>
           </Suspense>
         </Canvas>
       </KeyboardControls>
