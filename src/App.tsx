@@ -1,10 +1,8 @@
 import styles from './App.module.css'
-import { KeyboardControls, PointerLockControls, Sky } from '@react-three/drei'
+import { Suspense, useMemo } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { Physics } from '@react-three/rapier'
-import Ground from './components/ground/Ground.tsx'
-import Player from './components/player/Player.tsx'
-import { useMemo } from 'react'
+import { KeyboardControls } from '@react-three/drei'
+import Experience from './components/Experience.tsx'
 
 export const Controls = {
   forward: 'forward',
@@ -31,14 +29,9 @@ function App() {
     <main className={styles.main}>
       <KeyboardControls map={map}>
         <Canvas shadows camera={{ fov: 60 }}>
-          <Sky sunPosition={[100, 20, 100]} />
-          <ambientLight intensity={1} />
-          <pointLight castShadow intensity={0.8} position={[100, 100, 100]} />
-          <Physics debug gravity={[0, -10, 0]}>
-            <Player />
-            <Ground />
-          </Physics>
-          <PointerLockControls />
+          <Suspense fallback={null}>
+            <Experience />
+          </Suspense>
         </Canvas>
       </KeyboardControls>
     </main>
