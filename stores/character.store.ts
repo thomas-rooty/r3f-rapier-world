@@ -1,11 +1,11 @@
 import { create } from 'zustand'
 
 interface CharacterState {
-  position: [number, number, number]
-  setPosition: (position: [number, number, number]) => void
+  isOnFloor: boolean
+  setIsOnFloor: (isOnFloor: boolean) => void
 }
 
 export const useCharacterStore = create<CharacterState>((set) => ({
-  position: [0, 0, 0],
-  setPosition: (position) => set({ position }),
+  isOnFloor: true,
+  setIsOnFloor: (isOnFloor) => set({ isOnFloor }),
 }))
